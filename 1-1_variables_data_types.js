@@ -13,7 +13,7 @@ console.log(5 * 5);
 // camelCase
 // this is when we write the first word's letter in lowercase and subsequent first letters of words in upper case. it's used for naming variables and functions in JavaScript.
 
-// Data Types
+// Data Types & Variables
 
 // String (text in JS)
 let exampleString = "This is a string";

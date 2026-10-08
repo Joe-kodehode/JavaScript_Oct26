@@ -1,117 +1,114 @@
-// Conditionals
+// Lesson 3: Recap of JS Basics
 
-// if / else if / else
+// Section 1: Variables, Data Types and Operators
 
-//  basic if statement
+// Scenario: An online store managing products.
 
-let temperature = "hello";
+const storeName = "Tech Haven"; // string
+const productName = "Wireless Earbuds"; // string
+let productPrice = 900; // number
+let productQuantity = 4; // number
+let isInStock = true; // boolean
+const productTags = ["audio", "wireless", "accessory"]; // array
+let discount;
 
-if (temperature > 25) {
-  console.log("It's a hot day!");
-} else if (temperature > 20) {
-  console.log("it's a warm day");
-} else if (temperature > 0) {
-  console.log("it's a chilly day");
-} else if (temperature <= 0) {
-  console.log("it's freezing!");
+console.log(productTags);
+console.log(productTags[1]);
+console.log(discount);
+
+// Arithmetic operations
+let totalValue = productPrice * productQuantity; // multiplication
+console.log(totalValue);
+
+// Compound assignment (changing value)
+productPrice = productPrice + 50; // ❌
+productPrice += 50; //  ✅
+productPrice -= 200; //  ✅
+console.log(productPrice);
+
+// Increment and Decrement operators
+// Sell 1 product
+productQuantity -= 1; // ❌
+productQuantity--; //  ✅
+productQuantity++;
+
+console.log(productQuantity);
+
+// Checking the change to the totalValue after chaning price / quantity
+totalValue = productPrice * productQuantity;
+console.log(totalValue);
+
+// Find the remainder when total cost is divided by 50
+const remainder = totalValue % 50;
+console.log(remainder);
+
+// Section 2: Conditionals and Logical Operators
+
+let basketSize = 4500;
+
+// console.log a message to the user based on their basket size.
+// if the basket size is over 3000, we tell the user they qualify for free delivery
+// if the basket size is over 2500, we tell the user they are close to free delivery
+// if the basket size is under 2500, we tell them they would qualify for free delivery if they spend over 3000
+
+if (basketSize > 3000) {
+  console.log("You qualify for free delivery!");
+} else if (basketSize > 2500) {
+  console.log("You are close to free delivery!");
 } else {
-  console.log("an error has occured");
+  console.log("Spend over 3000 to get loser to free delivery!");
 }
 
-// Logical Operators && (AND)  || (OR)
+// Logical AND && and Logical OR ||
 
-let age = 1;
-let hasLicence = true;
-let points = 0;
+// Scenario: Show a discount message "You get a 15% discount" if the product is in stock AND the product is either on discount OR the quantity is over 200. Otherwise give the message "no discount applied"
 
-// if (age >= 18) {
-//   console.log("You are old enough to drive");
-// }
+isInStock = false;
+productQuantity = 250;
+discount = true;
 
-// if (hasLicence === true) {
-//   console.log("You have your licence");
-// }
-
-// AND &&
-if (age >= 18 && hasLicence && points < 8) {
-  console.log("You are allowed to drive");
+if (isInStock && (discount || productQuantity >= 200)) {
+  console.log("You get a 15% discount");
 } else {
-  console.log("You aren't allowed to drive!");
+  console.log("No discount applied");
 }
 
-// OR ||
-let day = "Hamburger";
-if (day === "Saturday" || day === "Sunday") {
-  console.log("It's the weekend! yipee!");
-} else if (
-  day === "Monday" ||
-  day === "Tuesday" ||
-  day === "Wednesday" ||
-  day === "Thursday" ||
-  day === "Friday"
-) {
-  console.log("It's a weekday");
-} else {
-  console.log("Error! Invalid day detected!");
-}
+// Ternary
+// Scenario: if the basket size is over 5000, console log "free shipping" otherwise console log "500kr shipping fee"
 
-// Using both && and || in the same conditional
+basketSize += 1000;
+console.log(basketSize);
 
-let referal = false;
-let firstShop = true;
-let premiumMember = false;
+const shippingFee = basketSize >= 5000 ? "free shipping" : "500kr shipping fee";
 
-// if the user has a referal and it's their first shop, they get a discount.
-// premium members ALWAYS get a discount
+console.log(shippingFee);
 
-if ((referal && firstShop) || premiumMember) {
-  console.log("You get a discount!");
-} else {
-  console.log("No discount, consider becoming a premium member");
-}
+// Switch Statement
+let category = "kitchen";
 
-// Ternary - often used instead of simple if / else
-
-let isMember = true;
-
-// if the user is a member, they pay 50kr delivery otherwise it's 100kr
-
-// if (isMember) {
-//   console.log("Delivery: 50kr");
-// } else {
-//   console.log("Delivery 100kr");
-// }
-
-let deliveryCost = isMember ? "50kr" : "100kr";
-
-console.log("Delivery:", deliveryCost);
-
-// Switch statement
-
-// A switch statement checks a value against multiple cases
-
-let fruit = "banana";
-
-switch (fruit) {
-  case "apple":
-    console.log("Apples are delicious!");
+switch (category) {
+  case "audio":
+    console.log("This product is in our Audio department");
     break;
-  case "banana":
-    console.log("Bananas are a great source of potassium!");
+  case "accessory":
+    console.log("This product is in our Accessories section");
     break;
-  case "orange":
-    console.log("Oranges are full of vitamin C!");
+  case "gadget":
+    console.log("this product belongs to our Gadgets collection");
     break;
   default:
-    console.log("Unknown fruit detected");
+    console.log("This product is from a general category");
 }
 
-// Use if / else if → for complex or varied conditions
-// Use switch → for one variable with many fixed values
+// Section 3: typeof
 
-// Truthy & Falsey
+console.log(typeof basketSize);
+console.log(typeof storeName);
+console.log(typeof discount);
 
-let value = NaN;
+// Section 4: truthy and falsey
+
+let value = "";
 
 if (value) {
   console.log("The value is true!");
@@ -135,30 +132,27 @@ if (value) {
 // Undefined
 // NaN (not a number)
 
-// Template String
+// Section 5: Template Strings
 
-const firstName = "Ola";
-const lastName = "Nordmann";
-const city = "Oslo";
-const country = "Norway";
+const firstName = "Alex";
+const lastName = "Miller";
+const city = "London";
+const country = "England";
 
-console.log(
-  "Welcome!" +
-    " " +
-    firstName +
-    " " +
-    lastName +
-    " " +
-    "from" +
-    " " +
-    city +
-    " " +
-    country +
-    " " +
-    "to my site!",
-);
+// const welcomeMessage =
+//   "Welcome," + " " + firstName + " " + lastName + "! Enjoy shopping with us.";
 
-// shift + `
-console.log(
-  `Welcome! ${firstName} ${lastName} from ${city} ${country} to my site!`,
-);
+// Hard-coded vs Soft-coded (dynamic)
+const welcomeMessage = `Welcome ${firstName} ${lastName}! From ${city}, ${country}. Enjoy shopping with us.`;
+
+console.log(welcomeMessage);
+
+// Section 6: Combining ternary and template strings
+
+basketSize = 1000;
+
+const discountApplied = basketSize > 5000;
+
+const basketMessage = `You ${discountApplied ? "are" : "aren't"} eligible for free delivery`;
+
+console.log(basketMessage);
