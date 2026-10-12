@@ -1,158 +1,159 @@
-// Lesson 3: Recap of JS Basics
+// Functions in JavaScript
 
-// Section 1: Variables, Data Types and Operators
+// A function is a block of code designed to do one specific task. It lets you write code once and reuse it, keeping your program clean and organized. However, the function won't do anything until you call it.
 
-// Scenario: An online store managing products.
-
-const storeName = "Tech Haven"; // string
-const productName = "Wireless Earbuds"; // string
-let productPrice = 900; // number
-let productQuantity = 4; // number
-let isInStock = true; // boolean
-const productTags = ["audio", "wireless", "accessory"]; // array
-let discount;
-
-console.log(productTags);
-console.log(productTags[1]);
-console.log(discount);
-
-// Arithmetic operations
-let totalValue = productPrice * productQuantity; // multiplication
-console.log(totalValue);
-
-// Compound assignment (changing value)
-productPrice = productPrice + 50; // ❌
-productPrice += 50; //  ✅
-productPrice -= 200; //  ✅
-console.log(productPrice);
-
-// Increment and Decrement operators
-// Sell 1 product
-productQuantity -= 1; // ❌
-productQuantity--; //  ✅
-productQuantity++;
-
-console.log(productQuantity);
-
-// Checking the change to the totalValue after chaning price / quantity
-totalValue = productPrice * productQuantity;
-console.log(totalValue);
-
-// Find the remainder when total cost is divided by 50
-const remainder = totalValue % 50;
-console.log(remainder);
-
-// Section 2: Conditionals and Logical Operators
-
-let basketSize = 4500;
-
-// console.log a message to the user based on their basket size.
-// if the basket size is over 3000, we tell the user they qualify for free delivery
-// if the basket size is over 2500, we tell the user they are close to free delivery
-// if the basket size is under 2500, we tell them they would qualify for free delivery if they spend over 3000
-
-if (basketSize > 3000) {
-  console.log("You qualify for free delivery!");
-} else if (basketSize > 2500) {
-  console.log("You are close to free delivery!");
-} else {
-  console.log("Spend over 3000 to get loser to free delivery!");
+// Regular function and Hoisting
+function sayHello() {
+  console.log("hello");
 }
 
-// Logical AND && and Logical OR ||
+sayHello();
 
-// Scenario: Show a discount message "You get a 15% discount" if the product is in stock AND the product is either on discount OR the quantity is over 200. Otherwise give the message "no discount applied"
+// We're allowed to call the function, before we've coded it because of hoisting. Hoising places the function at the top (we dont see this happen)
 
-isInStock = false;
-productQuantity = 250;
-discount = true;
+// function call
 
-if (isInStock && (discount || productQuantity >= 200)) {
-  console.log("You get a 15% discount");
-} else {
-  console.log("No discount applied");
+// Arrow Functions (no hoisting, need to call after creating the function)
+const arrowFunction = () => {
+  console.log("Hello from the arrow function");
+};
+
+arrowFunction();
+
+// Return Statement and Scope
+
+function messageOne() {
+  console.log(
+    "This function sends a message to the console. The function does not return any data",
+  );
 }
 
-// Ternary
-// Scenario: if the basket size is over 5000, console log "free shipping" otherwise console log "500kr shipping fee"
+messageOne();
 
-basketSize += 1000;
-console.log(basketSize);
+function messageTwo() {
+  const myMessage =
+    "This is a string, it was made inside the function and im using the return keyword to send it outside of the function";
 
-const shippingFee = basketSize >= 5000 ? "free shipping" : "500kr shipping fee";
-
-console.log(shippingFee);
-
-// Switch Statement
-let category = "kitchen";
-
-switch (category) {
-  case "audio":
-    console.log("This product is in our Audio department");
-    break;
-  case "accessory":
-    console.log("This product is in our Accessories section");
-    break;
-  case "gadget":
-    console.log("this product belongs to our Gadgets collection");
-    break;
-  default:
-    console.log("This product is from a general category");
+  return myMessage;
 }
 
-// Section 3: typeof
+const returnedData = messageTwo();
 
-console.log(typeof basketSize);
-console.log(typeof storeName);
-console.log(typeof discount);
+console.log(returnedData);
 
-// Section 4: truthy and falsey
+// If we create a variable with data inside a function, it is only scoped to that function, we cant use it outside the function.
 
-let value = "";
+// We can use the return keyword to send data back to/replace the function call.
 
-if (value) {
-  console.log("The value is true!");
-} else {
-  console.log("The value is false!");
+// As soon as the 'return' runs, we exit the function and no code inside the function below is read.
+
+// Functions with Parameters
+
+// Example 1: Hard coded
+
+function add() {
+  return 3 + 4;
 }
 
-// True
-// A string with value
-// A positive number
-// A negative number
-// An array with values inside
-// An empty array
-// An object with key value pairs
-// An empty object
+console.log(add());
 
-// False
-// A string with no value inside
-// The number 0
-// Null
-// Undefined
-// NaN (not a number)
+// Example 2: Soft coded (dynamic)
 
-// Section 5: Template Strings
+function minus(num1, num2) {
+  return num1 - num2;
+}
 
-const firstName = "Alex";
-const lastName = "Miller";
-const city = "London";
-const country = "England";
+console.log(minus(10, 3));
+console.log(minus(100, 50));
 
-// const welcomeMessage =
-//   "Welcome," + " " + firstName + " " + lastName + "! Enjoy shopping with us.";
+// Functions can have paramaters. Paramaters hold data, similar to variables.
 
-// Hard-coded vs Soft-coded (dynamic)
-const welcomeMessage = `Welcome ${firstName} ${lastName}! From ${city}, ${country}. Enjoy shopping with us.`;
+// When we call the function, we can put data into our paramaters to be used inside the function.
 
-console.log(welcomeMessage);
+// Using paramaters makes functions SUPER reusable, since we can pass in different data each time we call the function.
 
-// Section 6: Combining ternary and template strings
+// A reusable greeting function
 
-basketSize = 1000;
+const greeter = (name, time) => {
+  return `Good ${time} ${name}`;
+};
 
-const discountApplied = basketSize > 5000;
+console.log(greeter("Joe", "Morning"));
+console.log(greeter("Tim", "Evening"));
+console.log(greeter("Jess", "Afternoon"));
+console.log(greeter("Victoria", "Night"));
 
-const basketMessage = `You ${discountApplied ? "are" : "aren't"} eligible for free delivery`;
+// 1. all of the " " +  ✅ used a template string
+// 2. not everyone is called Joe ✅
+// 3. it's not always morning ✅
 
-console.log(basketMessage);
+// Implicit Return in Arrow Functions
+
+const multiply = (num1, num2) => num1 * num2;
+
+console.log(multiply(5, 10));
+console.log(multiply(100, 10));
+
+// If we're instantly returning data from an arrow function, we dont need the return keyword or the {}
+
+// Making a calculator using a function and a switch conditional
+
+function calculator(num1, num2, operator) {
+  switch (operator) {
+    case "+":
+      return num1 + num2;
+    case "-":
+      return num1 - num2;
+    case "*":
+      return num1 * num2;
+    case "/":
+      return num1 / num2;
+    default:
+      return "Error, invalid operator";
+  }
+}
+
+console.log(calculator(50, 5, "+")); // 55
+console.log(calculator(50, 5, "-")); // 45
+console.log(calculator(50, 5, "*")); // 250
+console.log(calculator(50, 5, "/")); // 10
+console.log(calculator(50, 5, "cat")); // Error
+
+// Updating a global variable using a function.
+
+// We're making a game and we need to adjust the player's health when they pick up heals or take damage.
+
+let health = 100;
+
+let maxHp = 200;
+
+// make a function that changes the player's health.
+
+function changeHp(direction, amount) {
+  if (direction === "up") {
+    health += amount;
+    if (health > maxHp) {
+      health = maxHp;
+    }
+  } else if (direction === "down") {
+    health -= amount;
+    if (health <= 0) {
+      console.log("You died");
+      health = 100;
+    }
+  }
+}
+
+changeHp("up", 20); // picked up small health pack
+console.log(health); // 120
+changeHp("down", 100); // fell off cliff
+console.log(health); // 20
+changeHp("up", 500); // picked up huge health pack
+console.log(health); // 200
+changeHp("down", 20000); // took a big hit from boss
+console.log(health);
+
+// Does the health go up or down - decided when we call the function ✅
+// it wont always be 50 up or down. ✅
+// if health is greater than 200, health is 200. ✅
+// If the health gets to 0, console.log("You died") and set the health back to 100, ready for the next game. ✅
