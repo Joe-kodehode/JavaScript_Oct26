@@ -1,159 +1,131 @@
-// Functions in JavaScript
+// Methods (built-in functions)
 
-// A function is a block of code designed to do one specific task. It lets you write code once and reuse it, keeping your program clean and organized. However, the function won't do anything until you call it.
+// A method in JavaScript is a built-in function that you use with a specific type of data, like strings, numbers or arrays. It lets you do something with that data—like change it, check it, copy or access part of it. Some methods alter the original piece of data, others don't alter the original!
 
-// Regular function and Hoisting
-function sayHello() {
-  console.log("hello");
-}
+// Section 1: String Methods
+const text = "     Hello, JavaScript World World!      ";
+console.log(text);
+console.log(text.trim()); // trim removes whitespace from both ends
+console.log(text.toUpperCase()); // converts string to uppercase
+console.log(text.toLowerCase()); // converts string to lowercase
+console.log(text.indexOf("JavaScript")); // returns starting index of the first instance of the passed in text
+console.log(text.slice(5, 10)); // extracts characters from index 5-9. Starting index is included, end index is not included.
+console.log(text.replace("World", "Universe")); // Replaces the first instance of the passed in word with the new word.
+console.log(text.replaceAll("World", "Galaxy")); // Replaces all instances of the passed in word with the new word.
+console.log(text.charCodeAt(5)); // Returns the unicode number of character at passed in index
+console.log(text.repeat(3)); // Repeats the string as many times as the passed in number
+console.log(text.length); // Returns the number of characters in the string
 
-sayHello();
+// Section 1.1: Converting a String into an Array
+console.log(text.trim().split(" "));
 
-// We're allowed to call the function, before we've coded it because of hoisting. Hoising places the function at the top (we dont see this happen)
+// Section 1.2: Converting a String into a Number
+let numberString = "123.45xyz";
 
-// function call
+console.log(Number(numberString)); // converts a string into a number. returns NaN (not a number) if any part of the string is invalid.
+console.log(parseInt(numberString)); // converts a string into a whole number, ignores text and decimals.
+console.log(parseFloat(numberString)); // converts a string into a number, doesn't ignore decimals, does ignore text.
 
-// Arrow Functions (no hoisting, need to call after creating the function)
-const arrowFunction = () => {
-  console.log("Hello from the arrow function");
-};
+// Section 2: Array Methods
+const colors = ["Red", "Green", "Blue"];
+// Even though colors is a const, we can use many different methods to alter the elements inside the array. We still can't reassign colors with =
+// console.log(colors[1]);
 
-arrowFunction();
+console.log(colors.length); // returns the number of elements in the array
+colors.push("Yellow"); // adds "Yellow" as a new element at the end of the array
+console.log(colors);
+const poppedColor = colors.pop(); // removes the last element of the array - does affect original array
+console.log(colors);
+console.log(poppedColor);
+colors.unshift("Purple"); // adds "Purple" as a new element at the start of the array
+console.log(colors);
+colors.shift(); // removes the first element of the array
+console.log(colors);
+colors.splice(0, 2, "Orange", "Pink"); // Replaces elements in the array, alters the original array
+//  Syntax: splice(starting index, amount of elements to remove, elements to replace with)
+console.log(colors);
+const splicedColors = colors.toSpliced(1, 1, "Brown"); // works like splice, but DOESN'T alter the original
+console.log(splicedColors);
 
-// Return Statement and Scope
+const numbersArray = [3, 1, 4, 1, 5, 9, 5];
+const sortedNumbers = numbersArray.toSorted(); // makes a copy of the array and sorts the elements inside
+console.log(sortedNumbers);
+console.log(numbersArray);
+numbersArray.sort(); // sorts the numbers in the array numerically, alters the original array
+console.log(numbersArray);
 
-function messageOne() {
-  console.log(
-    "This function sends a message to the console. The function does not return any data",
-  );
-}
+const stringsArray = ["hello", "this", "is", "an", "array", "of", "strings"];
+stringsArray.sort(); // sorts the strings alphabetically
+console.log(stringsArray);
 
-messageOne();
+console.log(sortedNumbers[6]); // targets element at index 6
+console.log(sortedNumbers.at(6)); // targets element at index 6
+console.log(sortedNumbers.at(-1)); // targets the last element in the array
 
-function messageTwo() {
-  const myMessage =
-    "This is a string, it was made inside the function and im using the return keyword to send it outside of the function";
+const reversedArray = sortedNumbers.toReversed(); // makes a copy of the original array and reverses it.
+console.log(reversedArray);
 
-  return myMessage;
-}
+sortedNumbers.reverse(); // sorts and reverses the original array.
+console.log(sortedNumbers);
 
-const returnedData = messageTwo();
+// Section 2.1: Converting an Array into a String
+console.log(colors);
+console.log(colors.join(" ")); // joins together the elements in the array into a string with a space between each element
 
-console.log(returnedData);
+// Section 3: Number Methods
+const myNum = 3.9369375923457;
 
-// If we create a variable with data inside a function, it is only scoped to that function, we cant use it outside the function.
+console.log(myNum);
+console.log(myNum.toFixed(2)); // rounded to the nearest 2 decimals AND convered the number into a string
+console.log(myNum.toExponential()); // returns our number in exponential notation.
 
-// We can use the return keyword to send data back to/replace the function call.
+// Section 3.1: Converting a Number into a String
+console.log(myNum.toString());
 
-// As soon as the 'return' runs, we exit the function and no code inside the function below is read.
+// Section 4: Chaining methods together
 
-// Functions with Parameters
+const rawString = "      JavaScript is fun!     ";
+console.log(rawString);
 
-// Example 1: Hard coded
+// remove whitespace from front and back ✅ .trim()
+// replace "fun" with "awesome" ✅ .replace("fun", "awesome")
+// make it uppercase ✅ .toUpperCase()
 
-function add() {
-  return 3 + 4;
-}
+const processedString = rawString
+  .trim()
+  .replace("fun", "awesome")
+  .toUpperCase();
 
-console.log(add());
+console.log(processedString);
 
-// Example 2: Soft coded (dynamic)
+// convert from array to string
+// make the string lowercase
+const wordsArray = ["HelLO", "worLD"];
 
-function minus(num1, num2) {
-  return num1 - num2;
-}
+const cleanedArray = wordsArray.join(" ").toLowerCase();
 
-console.log(minus(10, 3));
-console.log(minus(100, 50));
+console.log(cleanedArray);
 
-// Functions can have paramaters. Paramaters hold data, similar to variables.
+// take a number and round it to 2 decimals, convert it into a string and repeat it twice
 
-// When we call the function, we can put data into our paramaters to be used inside the function.
+const exampleNum = 345234.3452345;
+const cleanedNum = exampleNum.toFixed(2).repeat(2);
+console.log(cleanedNum);
 
-// Using paramaters makes functions SUPER reusable, since we can pass in different data each time we call the function.
+// Sidequest: Rounding numbers
 
-// A reusable greeting function
+console.log(Math.round(123.65)); // Math.round() rounds the passed in number to the nearest whole number
+console.log(Math.ceil(123.01)); // Math.ceil() rounds up the passed in number to the nearest whole number
+console.log(Math.floor(123.99)); // Math.floor() rounds down the passed in number to the nearest whole number
 
-const greeter = (name, time) => {
-  return `Good ${time} ${name}`;
-};
+// Math.random() generates a random number between 0.000000 - 0.9999999
+console.log(Math.random());
 
-console.log(greeter("Joe", "Morning"));
-console.log(greeter("Tim", "Evening"));
-console.log(greeter("Jess", "Afternoon"));
-console.log(greeter("Victoria", "Night"));
+// random num between 0.000000 - 9.999999
+console.log(Math.random() * 10);
 
-// 1. all of the " " +  ✅ used a template string
-// 2. not everyone is called Joe ✅
-// 3. it's not always morning ✅
+// random num between 0 - 10
+console.log(Math.floor(Math.random() * 11));
 
-// Implicit Return in Arrow Functions
-
-const multiply = (num1, num2) => num1 * num2;
-
-console.log(multiply(5, 10));
-console.log(multiply(100, 10));
-
-// If we're instantly returning data from an arrow function, we dont need the return keyword or the {}
-
-// Making a calculator using a function and a switch conditional
-
-function calculator(num1, num2, operator) {
-  switch (operator) {
-    case "+":
-      return num1 + num2;
-    case "-":
-      return num1 - num2;
-    case "*":
-      return num1 * num2;
-    case "/":
-      return num1 / num2;
-    default:
-      return "Error, invalid operator";
-  }
-}
-
-console.log(calculator(50, 5, "+")); // 55
-console.log(calculator(50, 5, "-")); // 45
-console.log(calculator(50, 5, "*")); // 250
-console.log(calculator(50, 5, "/")); // 10
-console.log(calculator(50, 5, "cat")); // Error
-
-// Updating a global variable using a function.
-
-// We're making a game and we need to adjust the player's health when they pick up heals or take damage.
-
-let health = 100;
-
-let maxHp = 200;
-
-// make a function that changes the player's health.
-
-function changeHp(direction, amount) {
-  if (direction === "up") {
-    health += amount;
-    if (health > maxHp) {
-      health = maxHp;
-    }
-  } else if (direction === "down") {
-    health -= amount;
-    if (health <= 0) {
-      console.log("You died");
-      health = 100;
-    }
-  }
-}
-
-changeHp("up", 20); // picked up small health pack
-console.log(health); // 120
-changeHp("down", 100); // fell off cliff
-console.log(health); // 20
-changeHp("up", 500); // picked up huge health pack
-console.log(health); // 200
-changeHp("down", 20000); // took a big hit from boss
-console.log(health);
-
-// Does the health go up or down - decided when we call the function ✅
-// it wont always be 50 up or down. ✅
-// if health is greater than 200, health is 200. ✅
-// If the health gets to 0, console.log("You died") and set the health back to 100, ready for the next game. ✅
+// random num between 1 - 10
+console.log(Math.floor(Math.random() * 10) + 1);
