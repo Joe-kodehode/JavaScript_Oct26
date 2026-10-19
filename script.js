@@ -1,147 +1,125 @@
-// Functions & Methods Recap
+// Loops
 
-// Check if an array includes an item. (function, array, methods)
+// A loop is a way to repeat code without writing it multiple times.
 
-const shoppingList = ["milk", "bread", "cheese", "pasta"];
-const gamesList = [
-  "Mario Kart",
-  "Hello Kitty Island Adventure",
-  "Counter Strike",
-  "Control: Resonant",
-  "Pang",
-  "Animal Crossing",
-  "Dragon Quest 11",
-  "Call of Duty",
-];
+// Section 1: Why we use loops?
 
-function checkItem(item, array) {
-  if (array.includes(item)) {
-    return `The array includes ${item}`;
-  } else {
-    return `${item} was not in the array`;
+const names = ["Tom", "Eric", "Jessica", "Timmy"];
+
+console.log(`Hei ${names[0]}`);
+console.log(`Hei ${names[1]}`);
+console.log(`Hei ${names[2]}`);
+
+// Section 2: The 'for loop'
+
+// where does it start ? i = 0
+// when does it end ?  i < 3 (ends when i reaches 3)
+// what changes each loop ? i++ (i goes up by 1)
+
+for (let i = 0; i < names.length; i++) {
+  console.log(`Hei ${names[i]}`);
+}
+
+// infinite loop - when the "when does it end" is never met
+// count backwards from 10 to 0
+for (let i = 10; i >= 0; i--) {
+  console.log(i);
+}
+
+// even numbers from 0 - 100
+for (let i = 0; i <= 100; i += 2) {
+  console.log(i);
+}
+
+// Section 3: Combine loops with functions and methods.
+
+// Function that takes in an array as a parameter, cleans and console logs each element of the array one by one using a loop.
+
+function greetEveryone(array) {
+  for (let i = 0; i < array.length; i++) {
+    const cleanedName = array[i].trim().toLowerCase();
+    console.log(`Hello, ${cleanedName}`);
   }
 }
 
-console.log(checkItem("milk", shoppingList));
-console.log(checkItem("Pang", gamesList));
-console.log(checkItem("Gears of War", gamesList));
+const people = ["  alIce", "  BOB   ", "charLIe  ", "dEBbY   ", "TiMMy  "];
+greetEveryone(people);
 
-// it's hard coded to milk...
-// it would be better if I could decide what to check for when I call the function...
-// it's always saying milk!  we need it to say whatever we passed in...
-// if the if comes back false, we dont return anything, therefore we get undefined when we console log the function call
+const people2 = ["  JiM  ", "henrY  ", "JanET ", "     SusIE"];
+greetEveryone(people2);
 
-// Make it work for more than one array (sometimes we want to check a different array, not the shoppingList)
+// Section 4: The 'for of loop'
 
-// convert a sentence into kebab-case (function, methods)
+// DRY - don't repeat yourself
 
-function toKebabCase(rawString) {
-  // get rid of the whitespace infront and behind
-  // make it all lowercase
-  // replace " " with "-"
-  // return the string
-  const kebabbedString = rawString.trim().replaceAll(" ", "-").toLowerCase();
+const colors = ["red", "green", "blue"];
 
-  return kebabbedString;
+// we can use a 'for of loop' when we want to loop over an array, hitting every element along the way from start to end.
+for (let color of colors) {
+  console.log(color);
 }
 
-const mySentence = "   Hello World From JavaScript   ";
-// "hello-world-from-javascript"
+// Section 5: The 'while loop'
 
-console.log(toKebabCase(mySentence));
-console.log(
-  toKebabCase(
-    "this is an exampLE OF THE FUNctION at Work                                                                                                                                                   ",
-  ),
-);
+// A while loop will run until a certain criteria is met - useful for when we dont know how many loops are necessary.
 
-// Make a function to check if a word is a Palindrome
+let count = 0;
 
-function checkPalindrome(word) {
-  if (word.toLowerCase() === word.toLowerCase().split("").reverse().join("")) {
-    return `${word} is a palindrome`;
-  } else {
-    return `${word} is not a palindrome`;
+while (count <= 5) {
+  console.log(count);
+  count++;
+}
+
+// Guessing game using a while loop
+
+// generate a random number between 1-10
+const secretNum = Math.floor(Math.random() * 10) + 1;
+
+let guess = 0;
+
+while (guess !== secretNum) {
+  guess++;
+  console.log(`Guessing ${guess}`);
+
+  if (guess === secretNum) {
+    console.log(`Correct! The secret number was: ${secretNum}`);
   }
 }
 
-console.log(checkPalindrome("Racecar"));
-console.log(checkPalindrome("banana"));
+// Section 6: Populating an array using a loop.
 
-// We cant use .reverse() on a string as its an array method
-// convert the string into an array, reverse it, convert back to string
+// Make a function which returns an array of random numbers.
 
-// console.log("banana".split("").reverse().join(""));
+function makeRandomArray(length, sides) {
+  const resultArray = [];
 
-// Math.random()
-
-// Math.random() gives us a random number between 0.00000 - 0.99999
-console.log(Math.random());
-
-// 0.00000 - 9.999999
-console.log(Math.random() * 10);
-
-// 0-9
-console.log(Math.floor(Math.random() * 10));
-
-// 1-10
-console.log(Math.floor(Math.random() * 10) + 1);
-
-const pokemon = [
-  "pikachu",
-  "diglett",
-  "electrode",
-  "machop",
-  "magikarp",
-  "mew",
-  "blastoise",
-  "vaporeon",
-  "psyduck",
-  "meowth",
-  "alakazam",
-];
-
-// Target a random element in the array
-console.log(pokemon);
-
-const randomIndex = Math.floor(Math.random() * pokemon.length);
-console.log(randomIndex);
-
-console.log(pokemon[randomIndex]);
-
-// make a rock paper scissors game
-
-const rockPaperScissors = (player1, player2) => {
-  switch (player1 + player2) {
-    case "rock" + "paper":
-    case "paper" + "scissors":
-    case "scissors" + "rock":
-      return "player 2 wins";
-    case "paper" + "rock":
-    case "rock" + "scissors":
-    case "scissors" + "paper":
-      return "player 1 wins";
-    case "paper" + "paper":
-    case "rock" + "rock":
-    case "scissors" + "scissors":
-      return "It's a draw";
-    default:
-      return "Error";
+  for (let i = 0; i < length; i++) {
+    const randomNum = Math.floor(Math.random() * sides) + 1;
+    resultArray.push(randomNum);
   }
-};
+  return resultArray;
+}
 
-// HOW DO I GET A RANDOM ANSWER???  "rock", "paper", "scissors"
+console.log(makeRandomArray(5, 10));
+console.log(makeRandomArray(10, 20));
+console.log(makeRandomArray(100, 12));
 
-const answerArray = ["rock", "paper", "scissors"];
+// Section 7: Finding the highest number in an array.
 
-const ranIndex = Math.floor(Math.random() * 3);
-const ranIndex2 = Math.floor(Math.random() * 3);
+function findHighest(array) {
+  let highestNum = array[0];
 
-const aiAnswer = answerArray[ranIndex];
-console.log(aiAnswer);
-const aiAnswer2 = answerArray[ranIndex2];
-console.log(aiAnswer2);
+  for (let num of array) {
+    console.log(num);
 
-console.log(rockPaperScissors(aiAnswer, aiAnswer2));
+    if (num > highestNum) {
+      highestNum = num;
+    }
+    console.log(highestNum);
+  }
+  return highestNum;
+}
 
-// the computer's answer will be randomised
+const exampleArray = makeRandomArray(20, 100);
+
+console.log(findHighest(exampleArray));
