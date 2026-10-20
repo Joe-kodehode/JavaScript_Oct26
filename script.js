@@ -21,6 +21,7 @@ for (let i = 0; i < names.length; i++) {
 }
 
 // infinite loop - when the "when does it end" is never met
+
 // count backwards from 10 to 0
 for (let i = 10; i >= 0; i--) {
   console.log(i);
@@ -123,3 +124,48 @@ function findHighest(array) {
 const exampleArray = makeRandomArray(20, 100);
 
 console.log(findHighest(exampleArray));
+
+// Section 8: Using Break and Continue
+
+const moreNames = [
+  "Tom",
+  "Eric",
+  "Jessica",
+  "Scott",
+  "Anna",
+  "Carl",
+  "Elisabeth",
+  "Benny",
+  "Oliver",
+  "Andy",
+  "Jenny",
+  "Ashley",
+  "Erin",
+  "Patrick",
+];
+
+// console.log all the names, except from "Andy"
+
+// stop looping all together, when the name is "Ashley"
+
+for (let name of moreNames) {
+  if (name === "Andy") {
+    continue; // skips to the next loop
+  }
+
+  if (name === "Ashley") {
+    break; // stop looping
+  }
+
+  console.log(name);
+}
+
+// --------------------------------------
+// Summary
+// --------------------------------------
+
+// for        → best when using an index or counting
+// for...of   → great for looping through array values
+// while      → useful when you don’t know how many times to repeat
+// break      → stops the loop early
+// continue   → skips to the next loop cycle
