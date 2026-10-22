@@ -1,156 +1,199 @@
-// Objects
+// Loop & Object recap
 
-// Section 1: What is an Object?
+// Looping through arrays.
 
-// An object is a datatype that stores related data in key value pairs
+const fruits = ["Apple", "Banana", "Mango", "Grapes", "Pear"];
 
-const person = {
-  name: "Alice",
-  age: 28,
-  job: "Designer",
-};
-
-console.log(person); // logs the entire object
-console.log(person.job); // logs a specific value stored in a key - dot notation
-console.log(person["name"]); // logs a specific value stored in a key - bracket notation
-
-// Dot vs bracket:
-// - Use dot when you know the key name at code time: person.name
-// - Use brackets when the key is dynamic or not a valid identifier: person[key]
-
-// Section 2: Creating, Modifying and Deleting
-
-person.country = "Norway"; // creates a new key-value pair
-person.age++; // increase the age by 1
-person.age += 5; // increase the age by 5
-person.age = 40; // assign the age to specifically 40
-delete person.job; // removes the key completely
-
-console.log(person);
-
-// Section 3: Looping through an Object using a 'for in loop'
-
-// prettier-ignore
-const user = {
-  name: "joe",
-  age: 38,
-  location: "stavanger",
-  hobbies: "gaming",
-};
-
-for (let key in user) {
-  console.log(key); // logs the current loops key
-  console.log(user[key]); // logs the current key's value
+// for loop - grants us access to starting index, when we end, how we increment.
+for (let i = 0; i < fruits.length; i++) {
+  console.log(fruits[i]);
 }
 
-// Dynamic key access is useful when you don’t know the property name in advance, like when looping through an object or handling user input.
-
-// Sidequest: JSON - JavaScript Object Notation
-
-const jsonUser = JSON.stringify(user); // turns an Object into JSON
-
-const regularObject = JSON.parse(jsonUser); // turns JSON in to a regular Object
-
-console.log(regularObject);
-
-// Section 4: Nested Objects and Arrays
-
-const userData = {
-  firstName: "Olav",
-  lastName: "Hansen",
-  age: 31,
-  isMember: true,
-  hobbies: ["Golf", "Hiking", "Cinema"],
-  address: {
-    streetName: "Solskinnsgaten",
-    streetNumber: 38,
-    postCode: 4050,
-  },
-};
-
-console.log(userData.firstName);
-console.log(userData.hobbies[1]);
-console.log(userData.address.postCode);
-
-// Section 5: Array of Objects // Object array
-
-const products = [
-  { productName: "Shirt", productId: 5, stock: 32 },
-  { productName: "Pants", productId: 6, stock: 5 },
-  { productName: "Socks", productId: 10, stock: 22 },
-];
-
-// What type of loop ?  'for of' because we're looping over an array
-
-for (let product of products) {
-  console.log(
-    `${product.productName} is product ID ${product.productId} and has ${product.stock} in stock`,
-  );
+// for of loop - loops over arrays, gives us access to a variable which stores a different element of the array each loop. The loop will start at the beginning of the array and go through all elements, then stop.
+for (let fruit of fruits) {
+  console.log(fruit);
 }
 
-const people = [
+// Section 2: Looping with conditions
+
+const numbers = [12, 5, 8, 130, 44, 3, 22];
+
+for (let number of numbers) {
+  // if the current number being looped over is less than 10, dont log it.
+  if (number < 10) {
+    continue;
+  }
+
+  // if the current number being looped over is over 100, stop the loop.
+  if (number >= 100) {
+    break;
+  }
+
+  console.log(number);
+}
+
+// Section 3: The While Loop - sets a condition to run the loop, MAKE SURE EVENTUALLY IT WILL BE FALSE! otherwise we get an infinite loop :(
+
+const ranNum = Math.floor(Math.random() * 10) + 1;
+let guess = 0;
+
+while (guess !== ranNum) {
+  guess++;
+  console.log(`Guessing: ${guess}`);
+  if (guess === ranNum) {
+    console.log(`Correct! The number was: ${ranNum}`);
+  }
+}
+
+// Section 4: Basic Object Review
+
+const movie = {
+  title: "The Matrix",
+  stars: [
+    "keanu reeves",
+    "laurence fishburne",
+    "carrie-ann moss",
+    "hugo weaving",
+  ],
+  runtime: "2h16m",
+  year: 1999,
+};
+
+console.log(movie);
+console.log(movie.title);
+console.log(movie.stars[3]);
+
+// change runtime to "2h30m"
+movie.runtime = "2h30m"; // change the value in a key
+movie.year = 2000; // change the value in a key
+movie.rating = 5; // create a new key-value pair
+delete movie.runtime; // delete a key value pair
+
+console.log(movie);
+
+// Section 5: Looping through an object using for in loop / dynamic keys
+
+for (let key in movie) {
+  console.log(key); // current key we're looping over
+  console.log(movie[key]); // current key's value
+}
+
+// Section 6: Array of objects
+
+const fruits2 = [
   {
-    name: "Thomas",
-    isMember: true,
-    age: 23,
-    hobbies: ["cycling", "football", "pool"],
+    name: "Apple",
+    color: "Red",
+    calories: 52,
+    pricePerKg: 3.5,
+    countryOfOrigin: "USA",
   },
   {
-    name: "Susan",
-    isMember: false,
-    age: 26,
-    hobbies: ["jogging", "travelling", "dancing"],
+    name: "Banana",
+    color: "Yellow",
+    calories: 89,
+    pricePerKg: 5.2,
+    countryOfOrigin: "Ecuador",
   },
   {
-    name: "Monica",
-    isMember: false,
-    age: 21,
-    hobbies: ["skateboarding", "guitar", "concerts"],
+    name: "Orange",
+    color: "Orange",
+    calories: 47,
+    pricePerKg: 2.8,
+    countryOfOrigin: "Spain",
   },
   {
-    name: "Avery",
-    isMember: true,
-    age: 28,
-    hobbies: ["coding", "games", "memes"],
+    name: "Strawberry",
+    color: "Red",
+    calories: 32,
+    pricePerKg: 6.0,
+    countryOfOrigin: "Mexico",
   },
   {
-    name: "Phillip",
-    isMember: true,
-    age: 24,
-    hobbies: ["boxing", "wrestling", "mma"],
+    name: "Mango",
+    color: "Orange",
+    calories: 60,
+    pricePerKg: 4.0,
+    countryOfOrigin: "India",
   },
   {
-    name: "Otto",
-    isMember: true,
-    age: 36,
-    hobbies: ["movies", "cinema", "music"],
+    name: "Grapes",
+    color: "Green",
+    calories: 69,
+    pricePerKg: 2.5,
+    countryOfOrigin: "Italy",
   },
   {
-    name: "Annabelle",
-    isMember: false,
-    age: 30,
-    hobbies: ["makeup", "fashion", "shopping", "BMX", "Warhammer"],
-  },
-  {
-    name: "Cathy",
-    isMember: false,
-    age: 18,
-    hobbies: ["design", "drawing"],
+    name: "Pineapple",
+    color: "Brown",
+    calories: 50,
+    pricePerKg: 3.0,
+    countryOfOrigin: "Costa Rica",
   },
 ];
 
-// what type of loop do we use to loop over people? Answer: A 'for of' loop because people is an array.
+// Describe each fruit using a loop
 
-// Goal: "Cathy is 18 years old, not a member and enjoys design"
-
-for (let person of people) {
-  // ternary to see if they are a member or not
-  const membership = person.isMember ? "" : "n't";
-
-  // generate a random index for the hobbies array
-  const randIndex = Math.floor(Math.random() * person.hobbies.length);
-
+for (let fruit of fruits2) {
   console.log(
-    `${person.name} is ${person.age} years old, is${membership} a member and enjoys ${person.hobbies[randIndex]}`,
+    `${fruit.name} is a ${fruit.color} fruit from ${fruit.countryOfOrigin}`,
   );
 }
+
+// --------------------------------------
+// Section 7: Find the Cheapest Fruit
+// --------------------------------------
+
+let cheapest = null;
+let lowestPrice = Infinity;
+
+for (let fruit of fruits2) {
+  if (fruit.pricePerKg < lowestPrice) {
+    lowestPrice = fruit.pricePerKg;
+    cheapest = fruit.name;
+  }
+}
+
+console.log(
+  `The cheapest fruit is ${cheapest}, costing ${lowestPrice} kr. per kg.`,
+);
+
+// --------------------------------------
+// Section 8: Adding and Removing Properties in a Loop
+// --------------------------------------
+
+// Add a "good" property to every fruit
+for (let fruit of fruits2) {
+  fruit.good = true;
+}
+
+console.log(fruits2); // now all have "good: true"
+
+// Remove the "good" property
+for (let fruit of fruits2) {
+  delete fruit.good;
+}
+
+console.log(fruits2); // back to original
+
+// --------------------------------------
+// Section 9: Object in Function
+// --------------------------------------
+
+function describeFruit(fruit) {
+  return `${fruit.name} contains ${fruit.calories} calories per 100g and costs ${fruit.pricePerKg} kr. per kg.`;
+}
+
+console.log(describeFruit(fruits2[1]));
+
+// --------------------------------------
+// Section 10: Summary
+// --------------------------------------
+
+// ✅ Use loops to repeat tasks or go through arrays and objects.
+// ✅ for...of is great for typical arrays;
+// ✅ for...in is used for object keys.
+// ✅ Objects store data in key-value pairs.
+// ✅ Arrays can contain multiple objects. (Object arrays)
+// ✅ Loops can combine with logic, conditions, and functions.
+// ✅ You can add, modify, or delete properties dynamically.
