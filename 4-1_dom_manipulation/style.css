@@ -1,0 +1,22 @@
+.new-paragraph {
+  color: green;
+}
+
+.box {
+  height: 100px;
+  width: 100px;
+  background-color: green;
+}
+
+.blue-box {
+  background-color: blue;
+}
+
+.border {
+  border: 2px solid black;
+}
+
+.body-background {
+  background-color: black;
+  color: white;
+}
